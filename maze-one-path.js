@@ -26,4 +26,55 @@
 
 // For the above maze, a possible exit path can be RRDDLLDDRRRRRR
 
-// ------------------------------------------------------------------------------------------------------------------
+
+let mySmallMaze = [
+    [' ', ' ', ' '],
+    [' ', '*', ' '],
+    [' ', ' ', 'e']
+];
+
+let maze = [
+        [' ', ' ', ' ', '*', ' ', ' ', ' '],
+        ['*', '*', ' ', '*', ' ', '*', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', '*', '*', '*', '*', '*', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', 'e']
+    ];
+
+const mazeOnePath = (x = 0, y = 0, maze) => {
+    const rows = maze.length - 1
+    console.log('Row -', rows)
+    const columns = maze[0].length - 1
+    console.log('Column - ', columns)
+
+    // Base Cases
+    if (x < 0 || x > columns || y < 0 || y > rows)
+        return 'Please input values for x and y that are >= 0'
+    
+    if (maze[y][x] === 'e')
+        return ` --- Reached exit at ${x}:${y}`
+
+    // Recursive Cases
+    if (maze[y][x + 1] !== '*' && x < columns) {
+        maze[y][x] = '*'
+        return 'R' + mazeOnePath(x + 1, y, maze)
+    }
+
+    if (maze[y][x - 1] !== '*' && x >= 0) {
+        maze[y][x] = '*'
+        return 'L' + mazeOnePath(x - 1, y, maze)
+    }
+
+    if (maze[y + 1][x] !== '*' && y < rows) {
+        maze[y][x] = '*'
+        return 'D' + mazeOnePath(x, y + 1, maze)
+    }
+
+    if (maze[y - 1][x] !== '*' && y >= 0) {
+        maze[y][x] = '*'
+        return 'U' + mazeOnePath(x, y - 1, maze)
+    }
+}
+
+console.log(mazeOnePath(0, 0, mySmallMaze))
+console.log(mazeOnePath(6, 0, maze))
