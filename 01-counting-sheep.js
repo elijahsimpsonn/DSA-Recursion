@@ -7,11 +7,11 @@
 const sheepCount = (int) => {
     // Base Case
     if (int === 0){
-        return ('All sheep have jumped over the fence')
+        return ('All the sheep have jumped over the fence')
     } 
     // Recursive Case
     return (
-        `${int}: Another sheep jumps over the fence \n` +
+        `Sheep number ${int} jumps over the fence \n` +
         sheepCount(int - 1)
     )
 }
